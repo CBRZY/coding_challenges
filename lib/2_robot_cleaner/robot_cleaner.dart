@@ -22,11 +22,12 @@ class RobotCleaner {
   void start() {
     cleaningMap?[startingPos.y][startingPos.x] = 'R';
     cleaningMap != null ? traverseMap() : null;
+    
   }
 
 
   void traverseMap() {
-    
+
   }
 
   
