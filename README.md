@@ -19,7 +19,7 @@ The Fibonacci numbers, commonly denoted F(n) form a sequence, called the Fibonac
 Given a two dimensional space, in this scenario, a 2d array, create a robot R that can traverse the entire space, by moving from an index point in the 2d array to the next.
 #### Rules:
 - The Robot can only move horizontally or vertically (left or right, up or down)
-- Traverse the 2d array in the least amount of moves
+- Traverse the entire 2d array
 - The Robot can travel to spaces it has already been to
 
 #### Example:
@@ -127,3 +127,4 @@ The Robot completed this 2d array in 8 steps
 #### Extra Challenge
 - Add obstacles(X) to the array that the Robot cannot pass through
 - Start the Robot in a random location
+- Traverse the 2d array in the least amount of steps
