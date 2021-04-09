@@ -28,5 +28,9 @@ void robotCleaner() {
   List<List<String>> newMap = List<List<String>>.generate(x, (_) => List.filled(y, '.'));
   RobotCleaner rc = RobotCleaner(cleaningMap: newMap);
 
-  executeChallenge(rc.start, 'The amount of steps the Robot took to clean the map is:', [true, 2]);
+  // Arguments:
+  // 1. bool => print map on each move
+  // 2. int => algorithm to use
+  var arguments = [true, 2];
+  executeChallenge(rc.start, 'The amount of steps the Robot took to clean the map is:', arguments);
 }
