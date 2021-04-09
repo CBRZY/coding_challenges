@@ -53,6 +53,13 @@ class RobotCleaner {
     }
   }
 
+  void moveFromTo(int moveFromX, int moveFromY, int moveToX, int moveToY) {
+    _cleaningMap[moveToY][moveToX] = 'R';
+    _cleaningMap[moveFromY][moveFromX] = '#';
+    currentPos = Position.from(moveToX, moveToY);
+    steps++;
+  }
+
   // Algorithm for prioritising move direction in the following order: UP, RIGHT, LEFT, DOWN
   void upRightDownLeft() {
     if (canMoveTo(currentPos.x, currentPos.y - 1)) { // Up
@@ -82,15 +89,6 @@ class RobotCleaner {
       print('CANT MOVE');
     }
   }
-
-  void moveFromTo(int moveFromX, int moveFromY, int moveToX, int moveToY) {
-    _cleaningMap[moveToY][moveToX] = 'R';
-    _cleaningMap[moveFromY][moveFromX] = '#';
-    currentPos = Position.from(moveToX, moveToY);
-    steps++;
-  }
-
-  
 
   bool canMoveTo(int moveToX, int moveToY) {
     if (moveToX >= 0 && moveToX < _cleaningMap[0].length && moveToY >= 0 && moveToY < _cleaningMap.length) {
