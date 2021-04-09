@@ -9,22 +9,23 @@ class Position {
 }
 
 class RobotCleaner {
-  List<List<String>> cleaningMap;
+  final List<List<String>> _cleaningMap;
   Position startingPos;
   Position currentPos;
   int steps = 0;
-  bool mapClean = false;
   bool shouldPrintMap = true;
+  int algorithmToRun = 1;
 
   // Create a new map, starting position and current position of Robot
-  RobotCleaner({required this.cleaningMap, int startingX = 0, int startingY = 0}) :
+  RobotCleaner({required cleaningMap, int startingX = 0, int startingY = 0}) :
+    _cleaningMap = cleaningMap,
     startingPos = Position(x: startingX, y: startingY),
     currentPos = Position(x: startingX, y: startingY);
 
   void printMap() {
     // Clear Debug Console
-    print("\x1B[2J\x1B[0;0H"); 
-    cleaningMap.forEach((row) { 
+    print('\x1B[2J\x1B[0;0H'); 
+    _cleaningMap.forEach((row) { 
       String displayRow = row.fold('', (prev, curr) => '$prev $curr');
       print(displayRow);
     });
@@ -32,71 +33,68 @@ class RobotCleaner {
     sleep(Duration(milliseconds: 100));
   }
 
-  int start(bool printMap) {
-    shouldPrintMap = printMap;
-    cleaningMap[startingPos.y][startingPos.x] = 'R';
+  int start(List<dynamic> args) {
+    shouldPrintMap = args[0];
+    algorithmToRun = args[1];
+    _cleaningMap[startingPos.y][startingPos.x] = 'R';
     traverseMap();
     return steps;
   }
 
   void traverseMap() {
     while(!isMapClean()!) {
-      if (canMoveUp()) {
-        cleaningMap[currentPos.y - 1][currentPos.x] = 'R';
-        cleaningMap[currentPos.y][currentPos.x] = '#';
-        currentPos = Position.from(currentPos.x, currentPos.y - 1);
-        steps++;
-      } else if (canMoveRight()) {
-        cleaningMap[currentPos.y][currentPos.x + 1] = 'R';
-        cleaningMap[currentPos.y][currentPos.x] = '#';
-        currentPos = Position.from(currentPos.x + 1, currentPos.y);
-        steps++;
-      } else if (canMoveDown()) {
-        cleaningMap[currentPos.y + 1][currentPos.x] = 'R';
-        cleaningMap[currentPos.y][currentPos.x] = '#';
-        currentPos = Position.from(currentPos.x, currentPos.y + 1);
-        steps++;
-      } else if (canMoveLeft()) {
-        cleaningMap[currentPos.y][currentPos.x - 1] = 'R';
-        cleaningMap[currentPos.y][currentPos.x] = '#';
-        currentPos = Position.from(currentPos.x - 1, currentPos.y);
-        steps++;
-      } else {
-        print('CANT MOVE');
-        mapClean = true;
+      switch (algorithmToRun) {
+        case 1: upRightDownLeft();
+          break;
+        case 2: rightLeftUpDown();
+          break;
       }
       shouldPrintMap ? printMap() : null;
     }
   }
 
-  // TODO: Clean up to only use a single method with parameters to calculate movability
-  bool canMoveUp() {
-    if (currentPos.y - 1 >= 0 && currentPos.y - 1 < cleaningMap.length) {
-      if (cleaningMap[currentPos.y - 1][currentPos.x] == '.') {
-        return true;
-      }
+  // Algorithm for prioritising move direction in the following order: UP, RIGHT, LEFT, DOWN
+  void upRightDownLeft() {
+    if (canMoveTo(currentPos.x, currentPos.y - 1)) { // Up
+      moveFromTo(currentPos.x, currentPos.y, currentPos.x, currentPos.y - 1);
+    } else if (canMoveTo(currentPos.x + 1, currentPos.y)) { // Right
+      moveFromTo(currentPos.x, currentPos.y, currentPos.x + 1, currentPos.y);
+    } else if (canMoveTo(currentPos.x, currentPos.y + 1)) { // Down
+      moveFromTo(currentPos.x, currentPos.y, currentPos.x, currentPos.y + 1);
+    } else if (canMoveTo(currentPos.x - 1, currentPos.y)) { // Left
+      moveFromTo(currentPos.x, currentPos.y, currentPos.x - 1, currentPos.y);
+    } else {
+      print('CANT MOVE');
     }
-    return false;
   }
-  bool canMoveRight() {
-    if (currentPos.x + 1 >= 0 && currentPos.x + 1 < cleaningMap[0].length) {
-      if (cleaningMap[currentPos.y][currentPos.x + 1] == '.') {
-        return true;
-      }
+
+  // Algorithm for prioritising move direction in the following order: RIGHT, LEFT, UP, DOWN
+  void rightLeftUpDown() {
+    if (canMoveTo(currentPos.x + 1, currentPos.y)) { // Right
+      moveFromTo(currentPos.x, currentPos.y, currentPos.x + 1, currentPos.y);
+    } else if (canMoveTo(currentPos.x - 1, currentPos.y)) { // Left
+      moveFromTo(currentPos.x, currentPos.y, currentPos.x - 1, currentPos.y);
+    } else if (canMoveTo(currentPos.x, currentPos.y - 1)) { // Up
+      moveFromTo(currentPos.x, currentPos.y, currentPos.x, currentPos.y - 1);
+    } else if (canMoveTo(currentPos.x, currentPos.y + 1)) { // Down
+      moveFromTo(currentPos.x, currentPos.y, currentPos.x, currentPos.y + 1);
+    } else {
+      print('CANT MOVE');
     }
-    return false;
   }
-  bool canMoveDown() {
-    if (currentPos.y + 1 >= 0 && currentPos.y + 1 < cleaningMap.length) {
-      if (cleaningMap[currentPos.y + 1][currentPos.x] == '.') {
-        return true;
-      }
-    }
-    return false;
+
+  void moveFromTo(int moveFromX, int moveFromY, int moveToX, int moveToY) {
+    _cleaningMap[moveToY][moveToX] = 'R';
+    _cleaningMap[moveFromY][moveFromX] = '#';
+    currentPos = Position.from(moveToX, moveToY);
+    steps++;
   }
-  bool canMoveLeft() {
-    if (currentPos.x - 1 >= 0 && currentPos.x - 1 < cleaningMap[0].length) {
-      if (cleaningMap[currentPos.y][currentPos.x - 1] == '.') {
+
+  
+
+  bool canMoveTo(int moveToX, int moveToY) {
+    if (moveToX >= 0 && moveToX < _cleaningMap[0].length && moveToY >= 0 && moveToY < _cleaningMap.length) {
+      if (_cleaningMap[moveToY][moveToX] == '.') {
         return true;
       }
     }
@@ -104,6 +102,6 @@ class RobotCleaner {
   }
 
   bool? isMapClean() {
-    return cleaningMap.every((row) => row.every((cell) => cell != '.'));
+    return _cleaningMap.every((row) => row.every((cell) => cell != '.'));
   }
 }
