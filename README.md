@@ -15,7 +15,7 @@ Tests for all methods can be found in [test](https://github.com/DigitalCapitan/c
 ### 1. Fibonacci
 The Fibonacci numbers, commonly denoted F(n) form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1.
 
-### 2. Robot Cleaner
+### 2. Robot Cleaner (Busy - Need to complete Extra Challenges)
 Given a two dimensional space, in this scenario, a 2d array, create a robot R that can traverse the entire space, by moving from an index point in the 2d array to the next.
 #### Rules:
 - The Robot can only move horizontally or vertically (left or right, up or down)
