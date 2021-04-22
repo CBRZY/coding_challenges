@@ -1,18 +1,43 @@
 import 'package:coding_challenges/fibonacci.dart';
+import 'package:coding_challenges/triangle.dart';
 import 'package:test/test.dart';
 
 void main() {
   group('1 Fibonacci', () {
     test('Iterative', () {
-      expect(fibonacci(8), 21);
-      expect(fibonacci(12), 144);
-      expect(fibonacci(20), 6765);
+      expect(executeChallenge(fibonacci, 'The Nth (8) Fibonacci number is:', [8]), 21);
+      expect(executeChallenge(fibonacci, 'The Nth (12) Fibonacci number is:', [12]), 144);
+      expect(executeChallenge(fibonacci, 'The Nth (20) Fibonacci number is:', [20]), 6765);
     });
     test('Recursive', () {
-      expect(fibonacciRecursive(8), 21);
-      expect(fibonacciRecursive(12), 144);
-      expect(fibonacciRecursive(20), 6765);
+      expect(executeChallenge(fibonacciRecursive, 'The Nth (8) Fibonacci number is:', [8]), 21);
+      expect(executeChallenge(fibonacciRecursive, 'The Nth (12) Fibonacci number is:', [12]), 144);
+      expect(executeChallenge(fibonacciRecursive, 'The Nth (20) Fibonacci number is:', [20]), 6765);
+    });
+  });
+
+  group('2 Triangle', () {
+    test('Positive triangle', () {
+      List<List<int>> triangle;
+      triangle = [[2],[3,4],[6,5,7],[4,1,8,3]];
+      expect(executeChallenge(minimumPathSum, 'The minimum path sum for triangle $triangle is:', [triangle]), 11);
+
+      
+    });
+    test('Negative triangle', () {
+      List<List<int>> triangle;
+      triangle = [[-1],[2,3],[1,-1,-3]];
+      expect(executeChallenge(minimumPathSum, 'The minimum path sum for triangle $triangle is:', [triangle]), -1);
     });
   });
   
+}
+
+dynamic executeChallenge(Function func, String stringToPrint, List<dynamic> arguments) {
+  int timeBefore = DateTime.now().microsecondsSinceEpoch;
+  var result = Function.apply(func, arguments);
+  int timeAfter = DateTime.now().microsecondsSinceEpoch;
+  print('$stringToPrint $result');
+  print('Executed in ${timeAfter - timeBefore} microseconds (10^-6)');
+  return result;
 }
