@@ -20,9 +20,11 @@ F(n) = F(n - 1) + F(n - 2), for n > 1.
 
 #### Example:
 
+```
 Input: n = 4
 Output: 3
 Explanation: F(4) = F(3) + F(2) = 2 + 1 = 3.
+```
 
 ### 2. Triangle
 Given a triangle array, return the minimum path sum from top to bottom.
@@ -31,6 +33,7 @@ For each step, you may move to an adjacent number of the row below. More formall
 
 #### Example:
 
+```
 Input: triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]
 Output: 11
 Explanation: The triangle looks like:
@@ -39,3 +42,4 @@ Explanation: The triangle looks like:
  6 5 7
 4 1 8 3
 The minimum path sum from top to bottom is 2 + 3 + 5 + 1 = 11.
+```
