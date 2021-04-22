@@ -1,4 +1,4 @@
-import 'package:coding_challenges/1_fibonacci/fibonacci.dart';
+import 'package:coding_challenges/fibonacci.dart';
 import 'package:test/test.dart';
 
 void main() {

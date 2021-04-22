@@ -13,118 +13,29 @@ Tests for all methods can be found in [test](https://github.com/DigitalCapitan/c
 
 ## Challenges
 ### 1. Fibonacci
-The Fibonacci numbers, commonly denoted F(n) form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1.
+The Fibonacci numbers, commonly denoted F(n) form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1. That is,
 
-### 2. Robot Cleaner (Busy - Need to complete Extra Challenges)
-Given a two dimensional space, in this scenario, a 2d array, create a robot R that can traverse the entire space, by moving from an index point in the 2d array to the next.
-#### Rules:
-- The Robot can only move horizontally or vertically (left or right, up or down)
-- Traverse the entire 2d array
-- The Robot can travel to spaces it has already been to
+F(0) = 0, F(1) = 1
+F(n) = F(n - 1) + F(n - 2), for n > 1.
 
 #### Example:
-Start the robot at [0,0]
 
-<table>
-<tr>
-<th> Start </th>
-<th> Step 1 </th>
-<th> Step 2 </th>
-<th> Step 3 </th>
-<th> Step 4 </th>
-<th> Step 5 </th>
-<th> Step 6 </th>
-<th> Step 7 </th>
-<th> Step 8 </th>
-</tr>
-<tr>
-<td>
+Input: n = 4
+Output: 3
+Explanation: F(4) = F(3) + F(2) = 2 + 1 = 3.
 
-| |0 |1  | 2|
---- | --- | --- | ---
-|0|R|.|.|
-|1|.|.|.|
-|2|.|.|.|
+### 2. Triangle
+Given a triangle array, return the minimum path sum from top to bottom.
 
-</td>
-<td>
+For each step, you may move to an adjacent number of the row below. More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.
 
-| |0 |1  | 2|
---- | --- | --- | ---
-|0|#|R|.|
-|1|.|.|.|
-|2|.|.|.|
+#### Example:
 
-</td>
-<td>
-
-| |0 |1  | 2|
---- | --- | --- | ---
-|0|#|#|R|
-|1|.|.|.|
-|2|.|.|.|
-
-</td>
-<td>
-
-| |0 |1  | 2|
---- | --- | --- | ---
-|0|#|#|#|
-|1|.|.|R|
-|2|.|.|.|
-
-</td>
-<td>
-
-| |0 |1  | 2|
---- | --- | --- | ---
-|0|#|#|#|
-|1|.|R|#|
-|2|.|.|.|
-
-</td>
-<td>
-
-| |0 |1  | 2|
---- | --- | --- | ---
-|0|#|#|#|
-|1|R|#|#|
-|2|.|.|.|
-
-</td>
-<td>
-
-| |0 |1  | 2|
---- | --- | --- | ---
-|0|#|#|#|
-|1|#|#|#|
-|2|R|.|.|
-
-</td>
-<td>
-
-| |0 |1  | 2|
---- | --- | --- | ---
-|0|#|#|#|
-|1|#|#|#|
-|2|#|R|.|
-
-</td>
-<td>
-
-| |0 |1  | 2|
---- | --- | --- | ---
-|0|#|#|#|
-|1|#|#|#|
-|2|#|#|R|
-
-</td>
-</tr>
-</table>
-
-The Robot completed this 2d array in 8 steps
-
-#### Extra Challenge
-- Add obstacles(X) to the array that the Robot cannot pass through
-- Start the Robot in a random location
-- Traverse the 2d array in the least amount of steps
+Input: triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]
+Output: 11
+Explanation: The triangle looks like:
+   2
+  3 4
+ 6 5 7
+4 1 8 3
+The minimum path sum from top to bottom is 2 + 3 + 5 + 1 = 11.

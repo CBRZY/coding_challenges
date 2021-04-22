@@ -1,16 +1,15 @@
-import 'package:coding_challenges/1_fibonacci/fibonacci.dart';
-import 'package:coding_challenges/2_robot_cleaner/robot_cleaner.dart';
+import 'package:coding_challenges/fibonacci.dart' as fib;
 
 void main(List<String> arguments) {
-  // fibonacci();
-  robotCleaner();
+  fibonacci();
 }
 
 // Call challenge methods with executeChallenge to see the time it takes to complete the solution
 void executeChallenge(Function func, String stringToPrint, List<dynamic> arguments) {
   int timeBefore = DateTime.now().microsecondsSinceEpoch;
-  print('$stringToPrint ${func(arguments)}');
+  var result = Function.apply(func, arguments);
   int timeAfter = DateTime.now().microsecondsSinceEpoch;
+  print('$stringToPrint $result}');
   print('Executed in ${timeAfter - timeBefore} microseconds (10^-6)');
 }
 
@@ -18,19 +17,6 @@ void executeChallenge(Function func, String stringToPrint, List<dynamic> argumen
 void fibonacci() {
   int fibN = 42;
 
-  executeChallenge(fibonacci, 'The ${fibN}th Fibonacci number is:', [fibN]);
-  executeChallenge(fibonacciRecursive, 'The ${fibN}th Fibonacci number (using recursion) is:', [fibN]);
-}
-
-// Challenge 2: Robot Cleaner => Traverse a 2D array with a robot
-void robotCleaner() {
-  int x = 10, y = 10;
-  List<List<String>> newMap = List<List<String>>.generate(x, (_) => List.filled(y, '.'));
-  RobotCleaner rc = RobotCleaner(cleaningMap: newMap);
-
-  // Arguments:
-  // 1. bool => print map on each move
-  // 2. int => algorithm to use
-  var arguments = [true, 2];
-  executeChallenge(rc.start, 'The amount of steps the Robot took to clean the map is:', arguments);
+  executeChallenge(fib.fibonacci, 'The Nth ($fibN) Fibonacci number is:', [fibN]);
+  executeChallenge(fib.fibonacciRecursive, 'The Nth ($fibN) Fibonacci number (using recursion) is:', [fibN]);
 }
