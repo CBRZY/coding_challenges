@@ -1,5 +1,5 @@
 /*
-  Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
+  Given an array of elements and an integer k, return the k most frequent elements. You may return the answer in any order.
 */
 
 List<T> topKFrequent<T>(List<T> elements, int k) {
