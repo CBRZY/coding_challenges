@@ -40,3 +40,14 @@ Explanation: The triangle looks like:
 4 1 8 3
 The minimum path sum from top to bottom is 2 + 3 + 5 + 1 = 11.
 ```
+
+### 3. Top K frequent elements
+Given an array of elements and an integer k, return the k most frequent elements. You may return the answer in any order.
+
+
+#### Example:
+
+```
+Input: nums = [1,1,1,2,2,3], k = 2
+Output: [1,2]
+```
