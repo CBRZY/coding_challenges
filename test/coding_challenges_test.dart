@@ -105,7 +105,7 @@ void main() {
           'The top $k elements in the list $ints is:',
           [ints, k],
         ),
-        (List returnData) => returnData.any(
+        (List returnData) => returnData.every(
           (element) => (element == 2 || element == 1),
         ),
       );
@@ -120,7 +120,7 @@ void main() {
           'The top $k elements in the list $strings is:',
           [strings, k],
         ),
-        (List returnData) => returnData.any(
+        (List returnData) => returnData.every(
           (element) => (element == 'A' || element == 'B' || element == 'R'),
         ),
       );
